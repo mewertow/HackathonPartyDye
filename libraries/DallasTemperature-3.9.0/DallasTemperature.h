@@ -22,7 +22,7 @@
 #ifdef __STM32F1__
 #include <OneWireSTM.h>
 #else
-#include <libraries\OneWire-2.3.7\OneWire.h>
+#include "../OneWire-2.3.7/OneWire.h"
 #endif
 
 // Model IDs

@@ -1,2 +1,2 @@
-#define THERMISTOR_PIN 3
-// #define HEATER_PIN
+#define THERMISTOR_PIN (A1)
+#define HEATER_PIN

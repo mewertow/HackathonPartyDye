@@ -1,16 +1,27 @@
 #pragma once
 
-#include "../libraries/DallasTemperature-3.9.0/DallasTemperature.h"
-#include "../libraries/OneWire-2.3.7/OneWire.h"
+#include <Arduino.h>
+#include "../Configuration.h"
+#include "../pins.h"
 
 class Thermistor
 {
 public:
-    inline float getTemp() const
+    void measure();
+    inline float getThermistorTemperature() const
     {
-        return current_temp;
+        return current_thermistor_temperature;
     }
-    // float setTemp(int target_temp);
+
+private:
+    volatile float current_thermistor_temperature = MIN_TEMPERATURE;
+    struct
+    {
+        const float beta = 3435.0;
+        const float room_temperature = 298.0;
+        const float resistance_roomtemp = 10000.0;
+        const float resistance_bias = 10000.0;
+    } m_thermistor;
 };
 
 extern Thermistor thermistor;
