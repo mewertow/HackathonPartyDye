@@ -4,7 +4,7 @@
 #include <Stepper.h>
 
 Impeller impeller;
-Stepper stepper(200, A15, A14, A13, A14);
+Stepper stepper(200, A15, A14, A13, A12);
 
 void Impeller::setStepDelay(float desired_speed) // input in RPM
 {
