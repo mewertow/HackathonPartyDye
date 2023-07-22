@@ -1,4 +1,4 @@
-#include "heating.h"
+#include "thermistor.h"
 #include <Arduino.h>
 
 Thermistor thermistor;

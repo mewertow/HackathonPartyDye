@@ -1,8 +1,10 @@
-#include "src/heating.h"
+#include "src/thermistor.h"
+"
 #include "pins.h"
 #include <Arduino.h>
 
-void setup()
+    void
+    setup()
 {
     Serial.begin(9600);
     Serial.println("PARTY TIME");
