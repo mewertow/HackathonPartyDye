@@ -1,5 +1,12 @@
 #define THERMISTOR_PIN (A1)
+#define FAN_PIN (A3)
 #define HEATER_PIN 13
-#define STEP_PIN 4
-#define DIRECTION_PIN 3
-// #define MOTOR_SIGNAL
+#define IMPELLER_STEP_PIN 4
+#define IMPELLER_DIRECTION_PIN 3
+#define PLATFORM_STEP_PIN 5
+#define PLATFORM_DIRECTION_PIN 6
+#define LIMIT_PIN 7
+#define PWR_BUTTON 8
+#define HEAT_LED 9
+#define DONE_LED 10
+#define START_DYE_LED 11

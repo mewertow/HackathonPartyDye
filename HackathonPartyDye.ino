@@ -2,39 +2,42 @@
 #include "src/heating.h"
 #include "src/impeller.h"
 #include "pins.h"
+#include "led.h"
+#include "src/fan.h"
+#include "dye.h"
 #include <Arduino.h>
-#include "motion.h"
+#include "platform.h"
 #include "Configuration.h"
+
+int raise_distance = 10;
+int dye_time = 0.5; // in minutes
 
 void setup()
 {
     Serial.begin(9600);
     Serial.println("PARTY TIME");
-    impeller.init();
-    // Adafruit_MotorShield AFMS = Adafruit_MotorShield();
-    // Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
-    // if (!AFMS.begin())
-    // { // create with the default frequency 1.6KHz
-    // if (!AFMS.begin(1000)) {  // OR with a different frequency, say 1KHz
-    // Serial.println("Could not find Motor Shield. Check wiring.");
-    // while (1)
-    // ;
-    // }
-    // Serial.println("Motor Shield found.");
-    // myMotor->setSpeed(10); // 10 rpm
 
-    // pinMode(9, OUTPUT);
-    // pinMode(10, OUTPUT);
-    // pinMode(11, INPUT);
-    // digitalWrite(9, HIGH);
-    // pinMode(10, LOW);
+    fan.turnOff();
+    heater.turnOff();
+    led.turnOff(HEAT_LED);
+    led.turnOff(DONE_LED);
+    led.turnOff(START_DYE_LED);
+
+    // Motors off
+    impeller.init();
+    platform.init();
+
+    platform.home();
+    platform.raise(raise_distance);
 }
 
 void loop()
 {
-    thermistor.measure();
-    heater.heat();
-    impeller.spin();
-    // timer.checkTime();
+    if (digitalRead(PWR_BUTTON))
+    {
+
+        dye.prepBath();
+        dye.dyeProcedure(dye_time);
+        dye.dyeCleanUp();
+    }
 }
-// raise(myMotor);

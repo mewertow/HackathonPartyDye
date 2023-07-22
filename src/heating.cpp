@@ -10,15 +10,15 @@ void Heater::heat()
     if ((millis() - now) > 60000)
     {
         now = millis();
-        if (thermistor.getThermistorTemperature() > 60.0)
+        if (thermistor.getThermistorTemperature() > 90.0)
         {
             digitalWrite(HEATER_PIN, LOW);
-            Serial.println("HEATER OFF");
+            isHeated = true;
         }
-        else if (thermistor.getThermistorTemperature() < 30.0)
+        else if (thermistor.getThermistorTemperature() < 85.0)
         {
             digitalWrite(HEATER_PIN, HIGH);
-            Serial.println("HEATER ON");
+            isHeated = false;
         }
         else if (isnan(thermistor.getThermistorTemperature()))
         {
@@ -27,4 +27,9 @@ void Heater::heat()
             Serial.println(thermistor.getThermistorTemperature());
         }
     }
+}
+
+void Heater::turnOff()
+{
+    digitalWrite(HEATER_PIN, LOW);
 }

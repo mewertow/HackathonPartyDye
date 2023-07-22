@@ -14,7 +14,7 @@ public:
     }
 
 private:
-    volatile float current_thermistor_temperature = MIN_TEMPERATURE;
+    volatile float current_thermistor_temperature;
     struct
     {
         const float beta = 3435.0;

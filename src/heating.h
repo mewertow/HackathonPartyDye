@@ -8,6 +8,9 @@ class Heater
 {
 public:
     void heat();
+    void turnOff();
+    void maintainHeat();
+    bool isHeated;
 
     inline void getHeaterStatus()
     {
