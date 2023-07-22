@@ -25,13 +25,11 @@ void Dye::prepBath()
     heater.heat();
     while (heater.isHeated == false)
         ;
-    led.turnOn(HEAT_LED);
     return bath_ready = true;
 }
 
 void Dye::dyeProcedure(int dye_time)
 {
-    led.turnOn(START_DYE_LED);
     static unsigned long now = millis();
     while (millis() - now < dye_time * 60 * 1000)
     {
@@ -41,11 +39,16 @@ void Dye::dyeProcedure(int dye_time)
     return;
 }
 
-void Dye::dyeCleanUp()
+void Dye::dyeCleanUp(int cool_time)
 {
     heater.turnOff();
-    platform.raise();
     impeller.turnOff();
-    fan.turnOn();
+    platform.raise();
+    static unsigned long now = millis();
+    while (millis() - now < cool_time * 60 * 1000)
+    {
+        fan.turnOn();
+    }
+    fan.turnOff();
     led.turnOn(DONE_LED);
 }

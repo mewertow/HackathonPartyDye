@@ -1,7 +1,7 @@
 #include "heating.h"
 #include "thermistor.h"
 #include <Arduino.h>
-
+#include "../led.h"
 Heater heater;
 
 void Heater::heat()
@@ -13,11 +13,13 @@ void Heater::heat()
         if (thermistor.getThermistorTemperature() > 90.0)
         {
             digitalWrite(HEATER_PIN, LOW);
+            led.turnOff(HEAT_LED);
             isHeated = true;
         }
         else if (thermistor.getThermistorTemperature() < 85.0)
         {
             digitalWrite(HEATER_PIN, HIGH);
+            led.turnOn(HEAT_LED);
             isHeated = false;
         }
         else if (isnan(thermistor.getThermistorTemperature()))

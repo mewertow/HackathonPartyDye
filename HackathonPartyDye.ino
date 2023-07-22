@@ -10,7 +10,8 @@
 #include "Configuration.h"
 
 int raise_distance = 10;
-int dye_time = 0.5; // in minutes
+int dye_time = 0.5;  // in minutes
+int cool_time = 0.5; // in minutes
 
 void setup()
 {
@@ -35,9 +36,11 @@ void loop()
 {
     if (digitalRead(PWR_BUTTON))
     {
-
+        led.turnOff(DONE_LED);
+        led.turnOn(START_DYE_LED);
         dye.prepBath();
         dye.dyeProcedure(dye_time);
-        dye.dyeCleanUp();
+        dye.dyeCleanUp(cool_time);
+        led.turnOff(START_DYE_LED);
     }
 }

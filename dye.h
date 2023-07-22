@@ -4,7 +4,7 @@ class Dye
 {
     void dyeMonitor();
     void dyeProcedure(int dye_time); // in minutes
-    void dyeCleanUp();
+    void dyeCleanUp(int cool_time);
     bool prepBath();
     bool bath_ready;
 };
