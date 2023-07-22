@@ -25,7 +25,7 @@ void Platform::home()
     while (digitalRead(LIMIT_PIN))
     {
         static unsigned long now = millis();
-        if ((millis() - now) >= 10)
+        if ((millis() - now) >= 1)
         {
             now = millis();
             digitalWrite(PLATFORM_STEP_PIN, HIGH);
@@ -41,9 +41,9 @@ void Platform::raise(float distance)
     for (int i = 0; i < raise_steps; i++)
     {
         digitalWrite(PLATFORM_STEP_PIN, HIGH);
-        delay(0.25);
+        delay(1);
         digitalWrite(PLATFORM_STEP_PIN, LOW);
-        delay(0.25);
+        // delay(1);
         Serial.println(raise_steps);
     }
 }

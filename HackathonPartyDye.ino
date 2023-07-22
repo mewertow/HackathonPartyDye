@@ -18,14 +18,14 @@ void setup()
     Serial.begin(9600);
     Serial.println("PARTY TIME");
 
-    fan.turnOff();
-    heater.turnOff();
-    led.turnOff(HEAT_LED);
-    led.turnOff(DONE_LED);
-    led.turnOff(START_DYE_LED);
+    // fan.turnOff();
+    // heater.turnOff();
+    // led.turnOff(HEAT_LED);
+    // led.turnOff(DONE_LED);
+    // led.turnOff(START_DYE_LED);
 
-    // Motors off
-    impeller.init();
+    // // Motors off
+    // impeller.init();
     platform.init();
 
     platform.home();
@@ -34,13 +34,17 @@ void setup()
 
 void loop()
 {
-    if (digitalRead(PWR_BUTTON))
-    {
-        led.turnOff(DONE_LED);
-        led.turnOn(START_DYE_LED);
-        dye.prepBath();
-        dye.dyeProcedure(DYE_TIME);
-        dye.dyeCleanUp(COOL_TIME);
-        led.turnOff(START_DYE_LED);
-    }
+    // thermistor.measure();
+    // Serial.println(thermistor.getThermistorTemperature());
+    // delay(1000);
+    // if (digitalRead(PWR_BUTTON))
+    // {
+    //     led.turnOff(DONE_LED);
+    //     led.turnOn(START_DYE_LED);
+    // dye.prepBath();
+    // dye.dyeProcedure(DYE_TIME);
+    // dye.dyeCleanUp(COOL_TIME);
+    //     led.turnOff(START_DYE_LED);
+    // }
+    // impeller.spin();
 }

@@ -22,10 +22,10 @@ void Dye::dyeMonitor()
 bool Dye::prepBath()
 {
     platform.home();
-    impeller.spin();
+    // impeller.spin();
     heater.heat();
-    while (heater.isHeated == false)
-        ;
+    // while (heater.isHeated == false)
+    //     ;
     return bath_ready = true;
 }
 
@@ -43,13 +43,13 @@ void Dye::dyeProcedure(int dye_time)
 void Dye::dyeCleanUp(int cool_time)
 {
     heater.turnOff();
-    impeller.turnOff();
+    // impeller.turnOff();
     platform.raise(RAISE_DISTANCE);
     static unsigned long now = millis();
-    while (millis() - now < cool_time * 60 * 1000)
-    {
-        fan.turnOn();
-    }
-    fan.turnOff();
-    led.turnOn(DONE_LED);
+    // while (millis() - now < cool_time * 60 * 1000)
+    // {
+    //     fan.turnOn();
+    // }
+    // fan.turnOff();
+    // led.turnOn(DONE_LED);
 }
