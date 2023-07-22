@@ -11,9 +11,7 @@ public:
     void setStepDelay(float desired_speed); // in RPM
     float step_delay;
     int steps_per_revolution = 200;
-    float speed = 400; // RPM
-
-    // private:
+    float speed = 100; // RPM
 };
 
 extern Impeller impeller;

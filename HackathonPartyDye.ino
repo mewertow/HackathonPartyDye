@@ -3,19 +3,38 @@
 #include "src/impeller.h"
 #include "pins.h"
 #include <Arduino.h>
+#include "motion.h"
+#include "Configuration.h"
 
 void setup()
 {
     Serial.begin(9600);
     Serial.println("PARTY TIME");
     impeller.init();
+    // Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+    // Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
+    // if (!AFMS.begin())
+    // { // create with the default frequency 1.6KHz
+    // if (!AFMS.begin(1000)) {  // OR with a different frequency, say 1KHz
+    // Serial.println("Could not find Motor Shield. Check wiring.");
+    // while (1)
+    // ;
+    // }
+    // Serial.println("Motor Shield found.");
+    // myMotor->setSpeed(10); // 10 rpm
+
+    // pinMode(9, OUTPUT);
+    // pinMode(10, OUTPUT);
+    // pinMode(11, INPUT);
+    // digitalWrite(9, HIGH);
+    // pinMode(10, LOW);
 }
 
 void loop()
 {
-    // Serial.println(thermistor.getThermistorTemperature());
     thermistor.measure();
     heater.heat();
     impeller.spin();
     // timer.checkTime();
 }
+// raise(myMotor);
