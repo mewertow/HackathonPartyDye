@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include "../Configuration.h"
 #include "../pins.h"
 
 class Thermistor

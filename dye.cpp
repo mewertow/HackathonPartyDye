@@ -4,6 +4,7 @@
 #include "src/fan.h"
 #include "led.h"
 #include "pins.h"
+#include "Configuration.h"
 #include "platform.h"
 #include "src/impeller.h"
 
@@ -18,7 +19,7 @@ void Dye::dyeMonitor()
     }
 }
 
-void Dye::prepBath()
+bool Dye::prepBath()
 {
     platform.home();
     impeller.spin();
@@ -43,7 +44,7 @@ void Dye::dyeCleanUp(int cool_time)
 {
     heater.turnOff();
     impeller.turnOff();
-    platform.raise();
+    platform.raise(RAISE_DISTANCE);
     static unsigned long now = millis();
     while (millis() - now < cool_time * 60 * 1000)
     {

@@ -8,6 +8,7 @@ class Impeller
 public:
     void init();
     void spin();
+    void turnOff();
     // void setStepDelay(float desired_speed); // in RPM
     // float step_delay;
     // int steps_per_revolution = 200;

@@ -6,8 +6,8 @@
 #include "src/fan.h"
 #include "dye.h"
 #include <Arduino.h>
-#include "platform.h"
 #include "Configuration.h"
+#include "platform.h"
 
 int raise_distance = 10;
 int dye_time = 0.5;  // in minutes
@@ -29,7 +29,7 @@ void setup()
     platform.init();
 
     platform.home();
-    platform.raise(raise_distance);
+    platform.raise(RAISE_DISTANCE);
 }
 
 void loop()
@@ -39,8 +39,8 @@ void loop()
         led.turnOff(DONE_LED);
         led.turnOn(START_DYE_LED);
         dye.prepBath();
-        dye.dyeProcedure(dye_time);
-        dye.dyeCleanUp(cool_time);
+        dye.dyeProcedure(DYE_TIME);
+        dye.dyeCleanUp(COOL_TIME);
         led.turnOff(START_DYE_LED);
     }
 }
