@@ -15,6 +15,7 @@ void Platform::init()
 {
     pinMode(PLATFORM_STEP_PIN, OUTPUT);
     pinMode(PLATFORM_DIRECTION_PIN, OUTPUT);
+    pinMode(LIMIT_PIN, INPUT);
     digitalWrite(PLATFORM_DIRECTION_PIN, HIGH);
     digitalWrite(PLATFORM_STEP_PIN, LOW);
 }
@@ -25,12 +26,15 @@ void Platform::home()
     while (digitalRead(LIMIT_PIN))
     {
         static unsigned long now = millis();
-        if ((millis() - now) >= 1)
+        if ((millis() - now) >= 0.025)
         {
             now = millis();
             digitalWrite(PLATFORM_STEP_PIN, HIGH);
         }
-        digitalWrite(PLATFORM_STEP_PIN, LOW);
+        else
+        {
+            digitalWrite(PLATFORM_STEP_PIN, LOW);
+        }
     }
 }
 
@@ -43,8 +47,8 @@ void Platform::raise(float distance)
         digitalWrite(PLATFORM_STEP_PIN, HIGH);
         delay(1);
         digitalWrite(PLATFORM_STEP_PIN, LOW);
-        // delay(1);
-        Serial.println(raise_steps);
+        delay(1);
+        // Serial.println(raise_steps);
     }
 }
 

@@ -9,14 +9,14 @@
 #include "Configuration.h"
 #include "platform.h"
 
-int raise_distance = 10;
-int dye_time = 0.5;  // in minutes
-int cool_time = 0.5; // in minutes
-
 void setup()
 {
     Serial.begin(9600);
     Serial.println("PARTY TIME");
+    // pinMode(RED_LED, OUTPUT);
+    // pinMode(BLUE_LED, OUTPUT);
+    // pinMode(GREEN_LED, OUTPUT);
+    // pinMode(FAN_PIN, OUTPUT);
 
     // fan.turnOff();
     // heater.turnOff();
@@ -25,15 +25,22 @@ void setup()
     // led.turnOff(START_DYE_LED);
 
     // // Motors off
-    // impeller.init();
-    platform.init();
+    impeller.init();
+    // platform.init();
 
-    platform.home();
-    platform.raise(RAISE_DISTANCE);
+    impeller.ramp();
+    // delay(5000);
+
+    // platform.home();
+    // platform.raise(RAISE_DISTANCE);
 }
 
 void loop()
 {
+    // impeller.ramp();
+    // delay(5000);
+    impeller.spin();
+    // platform.raise(RAISE_DISTANCE);
     // thermistor.measure();
     // Serial.println(thermistor.getThermistorTemperature());
     // delay(1000);
@@ -46,5 +53,29 @@ void loop()
     // dye.dyeCleanUp(COOL_TIME);
     //     led.turnOff(START_DYE_LED);
     // }
+    // platform.home();
+    // platform.raise(RAISE_DISTANCE);
     // impeller.spin();
+    // digitalWrite(HEATER_PIN, HIGH);
+    // delay(1000);
+    // digitalWrite(HEATER_PIN, LOW);
+    // delay(1000);
+    //
+    // fan.turnOn();
+    // delay(2000);
+    // fan.turnOff();
+    // delay(2000);
+    // digitalWrite(RED_LED, HIGH);
+    // delay(2000);
+    // digitalWrite(RED_LED, LOW);
+    // digitalWrite(BLUE_LED, HIGH);
+    // delay(2000);
+    // digitalWrite(BLUE_LED, LOW);
+    // delay(5000);
+    // digitalWrite(BLUE_LED, 0);
+    // digitalWrite(GREEN_LED, HIGH);
+    // delay(2000);
+    // digitalWrite(GREEN_LED, LOW);
+    // delay(5000);
+    // analogWrite(GREEN_LED, 0);
 }

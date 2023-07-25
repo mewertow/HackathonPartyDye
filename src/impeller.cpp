@@ -5,6 +5,7 @@
 
 Impeller impeller;
 
+// Use RPM to calculate step_delay. RPM should go in Configuration.h
 // void Impeller::setStepDelay(float desired_speed) // input in RPM
 // {
 //     unsigned long time_conversion = 60L * 1000L * 1000L / steps_per_revolution;
@@ -19,15 +20,36 @@ void Impeller::init()
     digitalWrite(IMPELLER_STEP_PIN, LOW);
 }
 
+// TODO: pass final delay to spin() function
+// We don't know why this works but it does
+void Impeller::ramp()
+{
+    for (float i = 3.0; i > 1.0; i = i - 0.25)
+    {
+        for (int j = 0; j < 200; j++)
+        {
+            digitalWrite(IMPELLER_STEP_PIN, HIGH);
+            delay(i);
+            digitalWrite(IMPELLER_STEP_PIN, LOW);
+            delay(i);
+            // Serial.println(i);
+        }
+        Serial.println(i);
+    }
+}
+
 void Impeller::spin()
 {
     static unsigned long now = millis();
-    if ((millis() - now) >= 0.5)
+    if ((millis() - now) >= 1) // 1
     {
         now = millis();
         digitalWrite(IMPELLER_STEP_PIN, HIGH);
     }
-    digitalWrite(IMPELLER_STEP_PIN, LOW);
+    else
+    {
+        digitalWrite(IMPELLER_STEP_PIN, LOW);
+    }
 }
 
 void Impeller::turnOff()

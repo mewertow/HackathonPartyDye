@@ -14,13 +14,13 @@ void Heater::heat()
         if (thermistor.getThermistorTemperature() > 50.0)
         {
             digitalWrite(HEATER_PIN, LOW);
-            led.turnOff(HEAT_LED);
+            // led.turnOff(HEAT_LED);
             isHeated = true;
         }
         else if (thermistor.getThermistorTemperature() < 30.0)
         {
             digitalWrite(HEATER_PIN, HIGH);
-            led.turnOn(HEAT_LED);
+            // led.turnOn(HEAT_LED);
             isHeated = false;
         }
         else if (isnan(thermistor.getThermistorTemperature()))
