@@ -26,13 +26,14 @@ void setup()
 
     // // Motors off
     impeller.init();
-    // platform.init();
+    platform.init();
 
-    impeller.ramp();
     // delay(5000);
 
-    // platform.home();
-    // platform.raise(RAISE_DISTANCE);
+    platform.home();
+    platform.raise(RAISE_DISTANCE);
+
+    impeller.ramp();
 }
 
 void loop()

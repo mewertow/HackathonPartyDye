@@ -16,13 +16,13 @@ void Platform::init()
     pinMode(PLATFORM_STEP_PIN, OUTPUT);
     pinMode(PLATFORM_DIRECTION_PIN, OUTPUT);
     pinMode(LIMIT_PIN, INPUT);
-    digitalWrite(PLATFORM_DIRECTION_PIN, HIGH);
+    digitalWrite(PLATFORM_DIRECTION_PIN, LOW);
     digitalWrite(PLATFORM_STEP_PIN, LOW);
 }
 
 void Platform::home()
 {
-    digitalWrite(PLATFORM_DIRECTION_PIN, HIGH);
+    digitalWrite(PLATFORM_DIRECTION_PIN, LOW);
     while (digitalRead(LIMIT_PIN))
     {
         static unsigned long now = millis();
@@ -40,7 +40,7 @@ void Platform::home()
 
 void Platform::raise(float distance)
 {
-    digitalWrite(PLATFORM_DIRECTION_PIN, LOW);
+    digitalWrite(PLATFORM_DIRECTION_PIN, HIGH);
     int raise_steps = steps_calc(distance);
     for (int i = 0; i < raise_steps; i++)
     {
