@@ -3,6 +3,7 @@
 class Dye
 {
 public:
+    void dyeReset();
     void dyeMonitor();
     void dyeProcedure(int dye_time); // in minutes
     void dyeCleanUp(int cool_time);

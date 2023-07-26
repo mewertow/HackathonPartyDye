@@ -38,6 +38,7 @@ void Platform::home()
     }
 }
 
+// TODO: can enter direction too
 void Platform::raise(float distance)
 {
     digitalWrite(PLATFORM_DIRECTION_PIN, HIGH);
@@ -48,7 +49,6 @@ void Platform::raise(float distance)
         delay(1);
         digitalWrite(PLATFORM_STEP_PIN, LOW);
         delay(1);
-        // Serial.println(raise_steps);
     }
 }
 

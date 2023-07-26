@@ -4,6 +4,7 @@
 #include <Stepper.h>
 
 Impeller impeller;
+volatile float ramp_delay = 3.0;
 
 // Use RPM to calculate step_delay. RPM should go in Configuration.h
 // void Impeller::setStepDelay(float desired_speed) // input in RPM
@@ -24,24 +25,27 @@ void Impeller::init()
 // We don't know why this works but it does
 void Impeller::ramp()
 {
-    for (float i = 3.0; i > 1.0; i = i - 0.25)
+    for (ramp_delay = 3.0; ramp_delay > 1.0; ramp_delay = ramp_delay - 0.25)
     {
         for (int j = 0; j < 200; j++)
         {
+            // Don't serial print in this loop
             digitalWrite(IMPELLER_STEP_PIN, HIGH);
-            delay(i);
+            delay(ramp_delay);
             digitalWrite(IMPELLER_STEP_PIN, LOW);
-            delay(i);
+            delay(ramp_delay);
             // Serial.println(i);
         }
-        Serial.println(i);
+        // Serial.println(i);
     }
+
+    // return ramp_delay;
 }
 
 void Impeller::spin()
 {
     static unsigned long now = millis();
-    if ((millis() - now) >= 1) // 1
+    if ((millis() - now) >= ramp_delay)
     {
         now = millis();
         digitalWrite(IMPELLER_STEP_PIN, HIGH);

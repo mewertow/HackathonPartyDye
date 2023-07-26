@@ -13,70 +13,41 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("PARTY TIME");
-    // pinMode(RED_LED, OUTPUT);
-    // pinMode(BLUE_LED, OUTPUT);
-    // pinMode(GREEN_LED, OUTPUT);
-    // pinMode(FAN_PIN, OUTPUT);
+
+    // TODO: create init() functions for LEDs, limit swich, and heater
+    pinMode(RED_LED, OUTPUT);
+    pinMode(BLUE_LED, OUTPUT);
+    pinMode(GREEN_LED, OUTPUT);
+    pinMode(FAN_PIN, OUTPUT);
+    pinMode(LIMIT_PIN, INPUT);
+    pinMode(HEATER_PIN, OUTPUT);
+
+    digitalWrite(RED_LED, HIGH);
+    digitalWrite(BLUE_LED, HIGH);
+    digitalWrite(GREEN_LED, HIGH);
 
     // fan.turnOff();
-    // heater.turnOff();
-    // led.turnOff(HEAT_LED);
-    // led.turnOff(DONE_LED);
-    // led.turnOff(START_DYE_LED);
+    heater.turnOff();
 
     // // Motors off
     impeller.init();
     platform.init();
 
-    // delay(5000);
+    dye.dyeReset();
+    dye.prepBath();
 
-    platform.home();
-    platform.raise(RAISE_DISTANCE);
-
-    impeller.ramp();
+    // impeller.ramp();
+    // impeller.spin();
 }
 
 void loop()
 {
-    // impeller.ramp();
-    // delay(5000);
-    impeller.spin();
-    // platform.raise(RAISE_DISTANCE);
-    // thermistor.measure();
-    // Serial.println(thermistor.getThermistorTemperature());
-    // delay(1000);
-    // if (digitalRead(PWR_BUTTON))
-    // {
-    //     led.turnOff(DONE_LED);
-    //     led.turnOn(START_DYE_LED);
+    digitalWrite(HEATER_PIN, LOW);
+    // impeller.spin();
+    fan.turnOn();
+    thermistor.measure();
+
     // dye.prepBath();
     // dye.dyeProcedure(DYE_TIME);
     // dye.dyeCleanUp(COOL_TIME);
-    //     led.turnOff(START_DYE_LED);
-    // }
-    // platform.home();
-    // platform.raise(RAISE_DISTANCE);
-    // impeller.spin();
-    // digitalWrite(HEATER_PIN, HIGH);
-    // delay(1000);
-    // digitalWrite(HEATER_PIN, LOW);
-    // delay(1000);
-    //
-    // fan.turnOn();
-    // delay(2000);
-    // fan.turnOff();
-    // delay(2000);
-    // digitalWrite(RED_LED, HIGH);
-    // delay(2000);
-    // digitalWrite(RED_LED, LOW);
-    // digitalWrite(BLUE_LED, HIGH);
-    // delay(2000);
-    // digitalWrite(BLUE_LED, LOW);
-    // delay(5000);
-    // digitalWrite(BLUE_LED, 0);
-    // digitalWrite(GREEN_LED, HIGH);
-    // delay(2000);
-    // digitalWrite(GREEN_LED, LOW);
-    // delay(5000);
-    // analogWrite(GREEN_LED, 0);
 }
