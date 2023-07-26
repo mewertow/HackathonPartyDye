@@ -11,16 +11,16 @@ void Heater::heat()
     if ((millis() - now) > 60000)
     {
         now = millis();
-        if (thermistor.getThermistorTemperature() > 70.0)
+        if (thermistor.getThermistorTemperature() > 60.0)
         {
             digitalWrite(HEATER_PIN, LOW);
-            // led.turnOff(HEAT_LED);
+            led.turnOff(RED_LED);
             isHeated = true;
         }
-        else if (thermistor.getThermistorTemperature() < 65.0)
+        else if (thermistor.getThermistorTemperature() < 55.0)
         {
             digitalWrite(HEATER_PIN, HIGH);
-            // led.turnOn(HEAT_LED);
+            led.turnOn(RED_LED);
             isHeated = false;
         }
         else if (isnan(thermistor.getThermistorTemperature()))

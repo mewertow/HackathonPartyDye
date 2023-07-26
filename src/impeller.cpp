@@ -36,7 +36,7 @@ void Impeller::ramp()
             delay(i);
             // Serial.println(i);
         }
-        Serial.println(i);
+        // Serial.println(i);
     }
 
     // return ramp_delay;

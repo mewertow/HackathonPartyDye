@@ -39,19 +39,15 @@ void Dye::heat()
     {
         heater.heat();
         impeller.spin(1.25);
+        // dyeMonitor();
     }
 }
 
 void Dye::dyeProcedure(int dye_time)
 {
-    // impeller.spin(1.25);
-    // heater.heat();
-
-    // while (millis() - now < dye_time * 60 * 1000)
-    // {
-
     heater.heat();
-    dyeMonitor();
+    impeller.spin(1.25);
+    // dyeMonitor();
     // return;
 }
 
