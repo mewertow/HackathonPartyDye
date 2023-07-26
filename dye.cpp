@@ -23,44 +23,46 @@ void Dye::dyeMonitor()
 void Dye::dyeReset()
 {
     platform.home();
-    platform.raise(30);
-    delay(5000);
+    platform.raise(RAISE_DISTANCE);
+    delay(10000);
 }
 
 bool Dye::prepBath()
 {
-
     platform.home();
-    impeller.spin();
     impeller.ramp();
+}
 
-    // heater.heat();
-    // while (heater.isHeated == false)
-    // ;
-    // return bath_ready = true;
+void Dye::heat()
+{
+    while (!heater.isHeated)
+    {
+        heater.heat();
+        impeller.spin(1.25);
+    }
 }
 
 void Dye::dyeProcedure(int dye_time)
 {
-    //     static unsigned long now = millis();
-    //     while (millis() - now < dye_time * 60 * 1000)
-    //     {
-    //         heater.heat();
-    //         dyeMonitor();
-    //     }
-    //     return;
+    // impeller.spin(1.25);
+    // heater.heat();
+
+    // while (millis() - now < dye_time * 60 * 1000)
+    // {
+
+    heater.heat();
+    dyeMonitor();
+    // return;
 }
 
 void Dye::dyeCleanUp(int cool_time)
 {
-    // heater.turnOff();
-    // impeller.turnOff();
-    // platform.raise(RAISE_DISTANCE);
-    // static unsigned long now = millis();
-    // while (millis() - now < cool_time * 60 * 1000)
-    // {
-    //     fan.turnOn();
-    // }
-    // fan.turnOff();
+    heater.turnOff();
+    digitalWrite(RED_LED, HIGH);
+    digitalWrite(BLUE_LED, HIGH);
+    digitalWrite(GREEN_LED, HIGH);
+    digitalWrite(HEATER_PIN, HIGH);
+    impeller.turnOff();
+    platform.raise(RAISE_DISTANCE); // static unsigned long now = millis();
     // led.turnOn(DONE_LED);
 }

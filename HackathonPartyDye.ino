@@ -22,9 +22,10 @@ void setup()
     pinMode(LIMIT_PIN, INPUT);
     pinMode(HEATER_PIN, OUTPUT);
 
-    digitalWrite(RED_LED, HIGH);
-    digitalWrite(BLUE_LED, HIGH);
-    digitalWrite(GREEN_LED, HIGH);
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(BLUE_LED, LOW);
+    digitalWrite(GREEN_LED, LOW);
+    digitalWrite(HEATER_PIN, LOW);
 
     // fan.turnOff();
     heater.turnOff();
@@ -33,21 +34,22 @@ void setup()
     impeller.init();
     platform.init();
 
+    // Prep bath and platform
     dye.dyeReset();
     dye.prepBath();
-
-    // impeller.ramp();
-    // impeller.spin();
 }
 
 void loop()
 {
-    digitalWrite(HEATER_PIN, LOW);
-    // impeller.spin();
-    fan.turnOn();
-    thermistor.measure();
+    impeller.spin(1.25);
+    dye.heat();
 
-    // dye.prepBath();
-    // dye.dyeProcedure(DYE_TIME);
-    // dye.dyeCleanUp(COOL_TIME);
+    static unsigned long now = millis();
+    while (millis() - now < DYE_TIME * 60 * 1000)
+    {
+        dye.dyeProcedure(DYE_TIME);
+    }
+
+    dye.dyeCleanUp(COOL_TIME);
+    return;
 }

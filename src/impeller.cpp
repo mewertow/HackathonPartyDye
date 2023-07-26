@@ -25,24 +25,24 @@ void Impeller::init()
 // We don't know why this works but it does
 void Impeller::ramp()
 {
-    for (ramp_delay = 3.0; ramp_delay > 1.0; ramp_delay = ramp_delay - 0.25)
+    for (float i = 3.0; i > 1.0; i = i - 0.25)
     {
-        for (int j = 0; j < 200; j++)
+        for (int j = 0; j < 400; j++)
         {
             // Don't serial print in this loop
             digitalWrite(IMPELLER_STEP_PIN, HIGH);
-            delay(ramp_delay);
+            delay(i);
             digitalWrite(IMPELLER_STEP_PIN, LOW);
-            delay(ramp_delay);
+            delay(i);
             // Serial.println(i);
         }
-        // Serial.println(i);
+        Serial.println(i);
     }
 
     // return ramp_delay;
 }
 
-void Impeller::spin()
+void Impeller::spin(float ramp_delay)
 {
     static unsigned long now = millis();
     if ((millis() - now) >= ramp_delay)

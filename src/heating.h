@@ -10,7 +10,7 @@ public:
     void heat();
     void turnOff();
     void maintainHeat();
-    bool isHeated;
+    bool isHeated = false;
 
     inline void getHeaterStatus()
     {
